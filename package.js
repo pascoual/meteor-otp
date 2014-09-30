@@ -1,7 +1,8 @@
 Package.describe({
+  name: "otp",
   summary: "Time-based One-time Password Algorithm",
-  version: "1.0.0",
-  git: " \* Fill me in! *\ "
+  version: "0.1.0",
+  git: "https://github.com/pascoual/meteor-otp.git"
 });
 
 Package.onUse(function(api) {
