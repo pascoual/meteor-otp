@@ -1,5 +1,5 @@
 Package.describe({
-  name: "otp",
+  name: "pascoual:otp",
   summary: "Time-based One-time Password Algorithm",
   version: "0.1.0",
   git: "https://github.com/pascoual/meteor-otp.git"
