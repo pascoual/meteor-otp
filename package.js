@@ -16,8 +16,8 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('pascoual:one-time-passcode');
-  api.addFiles('pascoual:one-time-passcode-tests.js');
+  api.use('pascoual:otp');
+  api.addFiles('one-time-passcode-tests.js');
 });
 
 Npm.depends({
