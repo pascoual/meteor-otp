@@ -26,26 +26,29 @@ if (typeof MeteorOTP === "undefined")
   MeteorOTP = {};
 
 /**
- * Run a function if OTP is ok
- * runAfterOTPCheck(yourFunction, arg1, arg2, ...)
+ * Call a callback if OTP is ok
+ * callAfterOTPCheck(yourFunction, arg1, arg2, ...)
+ *
+ * /!\ if called client side, be aware that this is easy to bypass.
+ *
+ * You need to call it client side for best user XP
+ * AND server side for security, in server method for example (to do security
+ * needs actions)
  */
-MeteorOTP.runAfterOTPCheck = function (toRun) {
-  var self = this;
-  var toRunArgs = Array.prototype.slice.call(arguments);
-  toRunArgs.shift();
+MeteorOTP.callAfterOTPCheck = function (callback) {
   try {
     if (MeteorOTP.checkOTPExpiration(Meteor.user())) {
       Meteor.call('checkOTP', prompt("Merci de taper un code OTP"), function (err, res) {
-        if (res)
-          // run the function fresh OTP is ok
-          toRun.apply(self, toRunArgs);
+        if (res) // only set a result if OTP is ok
+          callback(null, res);
         else
-          throw "OneTimePassCode error: OTP incorrect !"
+          callback(Meteor.Error(401, "OneTimePassCode error: OTP incorrect !"));
       });
+      return;
     }
   } catch (err) {
-    throw "OneTimePassCode error: you don't have OTP activated on your user account";
+    throw new Meteor.Error(501, "OneTimePassCode error: you don't have OTP activated on your user account");
   }
-  // run the function: OTP is not expired
-  toRun.apply(self, toRunArgs);
+  // run the callback: OTP is not expired
+  callback(null, true);
 }
