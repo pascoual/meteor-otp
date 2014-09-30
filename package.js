@@ -10,7 +10,7 @@ Package.onUse(function(api) {
   api.addFiles('one-time-passcode-common.js');
   api.addFiles('one-time-passcode-client.js', 'client');
   api.addFiles('one-time-passcode-server.js', 'server');
-  api.use('jeeeyul:moment-with-langs')
+  api.use('jeeeyul:moment-with-langs@2.8.2')
   api.export('MeteorOTP');
 });
 
