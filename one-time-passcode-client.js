@@ -32,8 +32,7 @@ if (typeof MeteorOTP === "undefined")
  * /!\ if called client side, be aware that this is easy to bypass.
  *
  * You need to call it client side for best user XP
- * AND server side for security, in server method for example (to do security
- * needs actions)
+ * AND made an other OTP check server side for security concerning critical actions
  */
 MeteorOTP.callAfterOTPCheck = function (callback) {
   try {
@@ -47,7 +46,7 @@ MeteorOTP.callAfterOTPCheck = function (callback) {
       return;
     }
   } catch (err) {
-    throw new Meteor.Error(501, "OneTimePassCode error: you don't have OTP activated on your user account");
+    callback(new Meteor.Error(501, "OneTimePassCode error: you don't have OTP activated on your user account"));
   }
   // run the callback: OTP is not expired
   callback(null, true);

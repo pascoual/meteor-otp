@@ -40,7 +40,7 @@ Meteor.methods({
   },
   checkOTP: function (code, tmp) {
     if (!this.userId)
-      throw new Meteor.Error(403, "Can only be called by a connected user.");
+      return new Meteor.Error(403, "Can only be called by a connected user.");
     var profileOTP = null;
     if (tmp)
       profileOTP = Meteor.users.findOne(this.userId, {fields: {'onePassCodeTmp': 1}}).onePassCodeTmp;
