@@ -1,7 +1,7 @@
 Package.describe({
   name: "pascoual:otp",
   summary: "MFA solution with One Time PassCode, compatible with google authenticator",
-  version: "0.1.1",
+  version: "0.1.2",
   git: "https://github.com/pascoual/meteor-otp.git"
 });
 
