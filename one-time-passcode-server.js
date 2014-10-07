@@ -22,7 +22,7 @@ Meteor.methods({
     if (!this.userId)
       throw new Meteor.Error(403, "Can only be called by a connected user.");
     var key = speakeasy.generate_key( {length : 20} );
-    var otpURL = "otpauth://totp/marvin.morea.fr:prichier@morea.fr?secret=" + key.base32 + "&issuer=marvin.morea.fr";
+    var otpURL = "otpauth://totp/marvin.morea.fr:" + Meteor.user().emails[0].address + "?secret=" + key.base32 + "&issuer=marvin.morea.fr";
     console.log(key.base32);
     Meteor.users.update(this.userId, {$set: {'onePassCodeTmp': {key: key, lastUsedCodes: [], activated: true}}});
     return otpURL;
